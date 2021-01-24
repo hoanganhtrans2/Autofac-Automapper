@@ -17,13 +17,14 @@ namespace WebAPI.Controllers
     {
         private IGenericRepository<Grade> repository = null;
         private IMapper mapper = null;
-        private IContainer container = null;
+        
 
         public GradeController()
         {
             mapper = ConfigMapper.Config();
-            container = AutofacConfig.Confing();
-            repository = container.BeginLifetimeScope().Resolve<IGenericRepository<Grade>>();
+            repository = AutofacConfig.Confing()
+                        .BeginLifetimeScope()
+                        .Resolve<IGenericRepository<Grade>>();
         }
         public IHttpActionResult GetAllGrade()
         {
